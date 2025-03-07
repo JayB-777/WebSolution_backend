@@ -1,0 +1,53 @@
+### 🛠 Gradle 관련 파일 ###
+.gradle/
+build/
+out/
+!gradle/wrapper/gradle-wrapper.jar
+
+### 🛠 Maven 관련 파일 ###
+.mvn/
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+### 🛠 IntelliJ IDEA 관련 파일 ###
+.idea/
+*.iml
+*.ipr
+*.iws
+
+### 🛠 VS Code 관련 파일 ###
+.vscode/
+
+### 🗄️ 환경 설정 파일 (보안) ###
+.env
+*.env
+*.yml
+application.yml
+application-dev.yml
+application-prod.yml
+application.properties
+application-*.yml
+!src/main/resources/application.yml.example  # 예제 파일 유지
+
+### 🗄️ 운영 로그 및 캐시 ###
+logs/
+*.log
+*.cache
+*.war
+*.jar
+nohup.out
+
+### 📦 의존성 관리 ###
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+### 🛠 OS 관련 파일 ###
+.DS_Store
+Thumbs.db
