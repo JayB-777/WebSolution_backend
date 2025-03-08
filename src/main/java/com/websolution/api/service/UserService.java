@@ -4,8 +4,6 @@ import com.websolution.api.dto.UserDto;
 import com.websolution.api.entity.Role;
 import com.websolution.api.entity.User;
 import com.websolution.api.repository.UserRepository;
-import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,14 +27,5 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public List<User> getPendingUsers() {
-        return userRepository.findAll().stream().filter(user -> user.getRole() == Role.PENDING)
-                .collect(Collectors.toList());
-    }
 
-    public void approveUser(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-        user.setRole(Role.USER);
-        userRepository.save(user);
-    }
 }

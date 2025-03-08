@@ -1,7 +1,7 @@
 package com.websolution.api.controller;
 
 import com.websolution.api.entity.User;
-import com.websolution.api.service.UserService;
+import com.websolution.api.service.AdminService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,16 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @PreAuthorize("hasRole('ADMIN')") // 관리자만 접근 가능
 public class AdminController {
-    private final UserService userService;
+    private final AdminService adminService;
 
     @GetMapping("/pending-users")
     public ResponseEntity<List<User>> getPendingUsers() {
-        return ResponseEntity.ok(userService.getPendingUsers());
+        return ResponseEntity.ok(adminService.getPendingUsers());
     }
 
     @PutMapping("/approve/{userId}")
     public ResponseEntity<?> approveUser(@PathVariable Long userId) {
-        userService.approveUser(userId);
+        adminService.approveUser(userId);
         return ResponseEntity.ok("회원가입 승인 완료");
     }
 }
