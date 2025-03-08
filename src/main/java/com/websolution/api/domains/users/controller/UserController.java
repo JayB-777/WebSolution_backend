@@ -1,5 +1,6 @@
 package com.websolution.api.domains.users.controller;
 
+import com.websolution.api.common.response.BaseResponse;
 import com.websolution.api.domains.entity.User;
 import com.websolution.api.domains.users.model.dto.UserDto;
 import com.websolution.api.domains.users.model.request.UserLoginRequest;
@@ -21,9 +22,9 @@ public class UserController {
     private final UserLoginService loginService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody UserDto userDto) {
+    public BaseResponse<User> register(@RequestBody UserDto userDto) {
         User savedUser = userService.register(userDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
+        return new BaseResponse<>(savedUser);
     }
 
     @PostMapping("/login")
