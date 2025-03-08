@@ -28,7 +28,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-        boolean isAuthenticated = loginService.authenticate(request.getUsername(), request.getPassword());
+        boolean isAuthenticated = loginService.authenticate(request.getUserId(), request.getPassword());
         return isAuthenticated ? ResponseEntity.ok("로그인 성공") :
                 ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 실패");
     }

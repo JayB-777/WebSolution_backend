@@ -18,10 +18,11 @@ public class UserService {
 
     public User register(UserDto userDto) {
         User user = new User();
-        user.setUsername(userDto.getUsername());
+        user.setLoginId(userDto.getLoginId());
+        user.setUserName(userDto.getUserName());
         user.setPassword(passwordEncoder.encode(userDto.getPassword())); // 비밀번호 암호화
         user.setEmail(userDto.getEmail());
-        user.setPhone(userDto.getPhone());
+        user.setPhoneNumber(userDto.getPhoneNumber());
         user.setCompany(userDto.getCompany());
         user.setRole(Role.PENDING); // 기본값: PENDING
 

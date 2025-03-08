@@ -20,10 +20,13 @@ import lombok.Setter;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long userId; //Primary Key는 userId (숫자 ID)
 
     @Column(nullable = false, unique = true)
-    private String username;
+    private String loginId; // 사용자가 로그인 시 사용하는 ID
+
+    @Column(nullable = false)
+    private String userName; //사용자 이름 (예: "홍길동")
 
     @Column(nullable = false)
     private String password; // BCrypt 암호화된 비밀번호 저장
@@ -32,7 +35,8 @@ public class User {
     private String email;
 
     @Column(nullable = false)
-    private String phone;
+    private String phoneNumber;
+
 
     @Column(nullable = true)
     private String company;
