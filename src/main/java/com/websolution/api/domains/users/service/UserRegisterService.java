@@ -1,16 +1,16 @@
-package com.websolution.api.service;
+package com.websolution.api.domains.users.service;
 
-import com.websolution.api.dto.UserDto;
-import com.websolution.api.entity.Role;
-import com.websolution.api.entity.User;
-import com.websolution.api.repository.UserRepository;
+import com.websolution.api.domains.entity.Role;
+import com.websolution.api.domains.entity.User;
+import com.websolution.api.domains.repository.UserRepository;
+import com.websolution.api.domains.users.model.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserRegisterService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 

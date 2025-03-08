@@ -1,10 +1,10 @@
-package com.websolution.api.controller;
+package com.websolution.api.domains.users.controller;
 
-import com.websolution.api.dto.LoginRequest;
-import com.websolution.api.dto.UserDto;
-import com.websolution.api.entity.User;
-import com.websolution.api.service.LoginService;
-import com.websolution.api.service.UserService;
+import com.websolution.api.domains.entity.User;
+import com.websolution.api.domains.users.model.dto.UserDto;
+import com.websolution.api.domains.users.model.request.UserLoginRequest;
+import com.websolution.api.domains.users.service.UserLoginService;
+import com.websolution.api.domains.users.service.UserRegisterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-public class AuthController {
-    private final UserService userService;
-    private final LoginService loginService;
+public class UserController {
+    private final UserRegisterService userService;
+    private final UserLoginService loginService;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody UserDto userDto) {
@@ -27,8 +27,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-        boolean isAuthenticated = loginService.authenticate(request.getUserId(), request.getPassword());
+    public ResponseEntity<?> login(@RequestBody UserLoginRequest request) {
+        boolean isAuthenticated = loginService.authenticate(request.getLoginId(), request.getPassword());
         return isAuthenticated ? ResponseEntity.ok("로그인 성공") :
                 ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 실패");
     }

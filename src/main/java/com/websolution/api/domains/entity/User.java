@@ -1,4 +1,4 @@
-package com.websolution.api.entity;
+package com.websolution.api.domains.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

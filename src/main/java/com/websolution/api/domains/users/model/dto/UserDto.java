@@ -1,4 +1,4 @@
-package com.websolution.api.dto;
+package com.websolution.api.domains.users.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;

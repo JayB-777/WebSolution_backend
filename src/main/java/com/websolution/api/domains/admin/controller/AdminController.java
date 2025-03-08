@@ -1,7 +1,7 @@
-package com.websolution.api.controller;
+package com.websolution.api.domains.admin.controller;
 
-import com.websolution.api.entity.User;
-import com.websolution.api.service.AdminService;
+import com.websolution.api.domains.admin.service.AdminLoginService;
+import com.websolution.api.domains.entity.User;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @PreAuthorize("hasRole('ADMIN')") // 관리자만 접근 가능
 public class AdminController {
-    private final AdminService adminService;
+    private final AdminLoginService adminService;
 
     @GetMapping("/pending-users")
     public ResponseEntity<List<User>> getPendingUsers() {

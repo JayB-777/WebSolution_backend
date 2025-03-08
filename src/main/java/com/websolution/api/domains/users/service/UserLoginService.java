@@ -1,20 +1,20 @@
-package com.websolution.api.service;
+package com.websolution.api.domains.users.service;
 
-import com.websolution.api.entity.Role;
-import com.websolution.api.entity.User;
-import com.websolution.api.repository.UserRepository;
+import com.websolution.api.domains.entity.Role;
+import com.websolution.api.domains.entity.User;
+import com.websolution.api.domains.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class LoginService {
+public class UserLoginService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public boolean authenticate(String userName, String rawPassword) {
-        User user = userRepository.findByUserName(userName).orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
+    public boolean authenticate(String loginId, String rawPassword) {
+        User user = userRepository.findByLoginId(loginId).orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
 
         // PENDING 상태의 사용자는 로그인 불가
         if (user.getRole() == Role.PENDING) {

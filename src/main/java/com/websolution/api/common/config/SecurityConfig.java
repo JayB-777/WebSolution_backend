@@ -1,4 +1,4 @@
-package com.websolution.api.config;
+package com.websolution.api.common.config;
 
 import java.util.List;
 import org.springframework.context.annotation.Bean;
