@@ -15,7 +15,7 @@ public enum BaseResponseStatus {
     INTERNAL_SERVER_ERROR(false, 500, "서버 내부 오류가 발생하였습니다."),
 
     // ✅ 로그인 관련 응답
-    LOGIN_FAILED(false, 40, "잘못된 아이디 혹은 비밀번호입니다."), LOGIN_PENDING(false, 400, "관리자 승인 대기 중인 사용자입니다."),
+    LOGIN_FAILED(false, 400, "잘못된 아이디 혹은 비밀번호입니다."), LOGIN_PENDING(false, 400, "관리자 승인 대기 중인 사용자입니다."),
 
     // ✅ 회원가입 관련 응답
     DUPLICATE_LOGIN_ID(false, 400, "이미 존재하는 로그인 ID입니다."), DUPLICATE_EMAIL(false, 400, "이미 사용 중인 이메일입니다.");
