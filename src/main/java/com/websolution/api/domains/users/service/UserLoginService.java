@@ -1,5 +1,6 @@
 package com.websolution.api.domains.users.service;
 
+import com.websolution.api.common.response.BaseResponseStatus;
 import com.websolution.api.domains.entity.Role;
 import com.websolution.api.domains.entity.User;
 import com.websolution.api.domains.repository.UserRepository;
@@ -15,21 +16,25 @@ public class UserLoginService {
     private final PasswordEncoder passwordEncoder;
 
     public boolean authenticate(String loginId, String rawPassword) {
+        // 1. 사용자 정보 조회
         Optional<User> userOptional = userRepository.findByLoginId(loginId);
-
-        // 사용자가 존재하지 않으면 false 반환
         if (userOptional.isEmpty()) {
-            return false;
+            throw new IllegalArgumentException(BaseResponseStatus.NOT_FOUND_LOGIN_ID.getMessage());
         }
 
         User user = userOptional.get();
 
-        // PENDING 상태의 사용자는 로그인 불가
-        if (user.getRole() == Role.PENDING) {
-            return false;
+        // 2. 비밀번호 검증 (틀리면 로그인 실패 처리)
+        if (!passwordEncoder.matches(rawPassword, user.getPassword())) {
+            throw new IllegalArgumentException(BaseResponseStatus.LOGIN_FAILED.getMessage());
         }
 
-        // 승인된 사용자만 비밀번호 검증 수행
-        return passwordEncoder.matches(rawPassword, user.getPassword());
+        // 3. PENDING 상태 체크 (비밀번호가 맞은 후에 검증)
+        if (user.getRole() == Role.PENDING) {
+            throw new IllegalStateException(BaseResponseStatus.LOGIN_PENDING.getMessage());
+        }
+
+        // 4. 로그인 성공
+        return true;
     }
 }

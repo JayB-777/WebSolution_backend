@@ -19,12 +19,12 @@ public class UserRegisterService {
 
         // loginId 중복 검사
         if (userRepository.existsByLoginId(userDto.getLoginId())) {
-            throw new RuntimeException(BaseResponseStatus.DUPLICATE_LOGIN_ID.getMessage());
+            throw new IllegalArgumentException(BaseResponseStatus.DUPLICATE_LOGIN_ID.getMessage());
         }
 
         // email 중복 검사
         if (userRepository.existsByEmail(userDto.getEmail())) {
-            throw new RuntimeException(BaseResponseStatus.DUPLICATE_EMAIL.getMessage());
+            throw new IllegalArgumentException(BaseResponseStatus.DUPLICATE_EMAIL.getMessage());
         }
 
         User user = new User();
