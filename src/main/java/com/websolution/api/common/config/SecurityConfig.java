@@ -29,7 +29,8 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(
                         auth -> auth.requestMatchers("/api/auth/**").permitAll().requestMatchers("/api/admin/**")
-                                .hasRole("ADMIN").anyRequest().authenticated());
+//                                .hasRole("ADMIN").anyRequest().authenticated());
+                                .permitAll().anyRequest().authenticated()); // 모든 요청 허용 (테스트용)
 
         return http.build();
     }
