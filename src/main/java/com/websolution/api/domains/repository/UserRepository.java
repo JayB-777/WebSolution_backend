@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByLoginId(String loginId);
 
+    List<User> findByLoginIdIn(List<String> loginIds);
+    
     List<PendingUserResponse> findByRole(Role role);
 
     boolean existsByLoginId(String loginId);
