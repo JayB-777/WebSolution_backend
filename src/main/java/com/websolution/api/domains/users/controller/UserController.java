@@ -5,6 +5,7 @@ import com.websolution.api.common.response.BaseResponseStatus;
 import com.websolution.api.domains.entity.User;
 import com.websolution.api.domains.users.model.dto.UserDto;
 import com.websolution.api.domains.users.model.request.UserLoginRequest;
+import com.websolution.api.domains.users.model.response.UserLoginResponse;
 import com.websolution.api.domains.users.service.UserLoginService;
 import com.websolution.api.domains.users.service.UserRegisterService;
 import lombok.RequiredArgsConstructor;
@@ -27,11 +28,11 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public BaseResponse<String> login(@RequestBody UserLoginRequest request) {
-        boolean isAuthenticated = loginService.authenticate(request.getLoginId(), request.getPassword());
-        if (!isAuthenticated) {
+    public BaseResponse<UserLoginResponse> login(@RequestBody UserLoginRequest request) {
+        User authenticatedUser = loginService.authenticate(request.getLoginId(), request.getPassword());
+        if (authenticatedUser == null) {
             return new BaseResponse<>(BaseResponseStatus.LOGIN_FAILED);
         }
-        return new BaseResponse<>(BaseResponseStatus.SUCCESS, "로그인 성공");
+        return new BaseResponse<>(new UserLoginResponse(authenticatedUser.getLoginId()));
     }
 }
