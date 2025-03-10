@@ -16,13 +16,13 @@ public enum BaseResponseStatus {
 
     // ✅ 로그인 관련 응답
     LOGIN_FAILED(false, 400, "잘못된 아이디 혹은 비밀번호입니다."), LOGIN_PENDING(false, 400, "관리자 승인 대기 중인 사용자입니다."),
-    NOT_FOUND_LOGIN_ID(false, 400, "존재 하지 않는 아이디 입니다."),
+    NOT_FOUND_LOGIN_ID(false, 400, "존재하지 않는 아이디 입니다."),
 
     // ✅ 회원가입 관련 응답
     DUPLICATE_LOGIN_ID(false, 400, "이미 존재하는 로그인 ID 입니다."), DUPLICATE_EMAIL(false, 400, "이미 사용 중인 이메일입니다."),
 
     // ✅ 회원가입 승인 관련 응답
-    NOT_FOUND_PENDING_USER(false, 400, "승인대기 중인 유저가 없습니다.");
+    NOT_FOUND_PENDING_USER(false, 400, "승인 대기 중인 유저가 없습니다.");
 
     private final boolean isSuccess;
     private final int code;
