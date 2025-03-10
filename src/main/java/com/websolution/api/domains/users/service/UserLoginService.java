@@ -15,7 +15,7 @@ public class UserLoginService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public boolean authenticate(String loginId, String rawPassword) {
+    public User authenticate(String loginId, String rawPassword) {
         // 1. 사용자 정보 조회
         Optional<User> userOptional = userRepository.findByLoginId(loginId);
         if (userOptional.isEmpty()) {
@@ -35,6 +35,6 @@ public class UserLoginService {
         }
 
         // 4. 로그인 성공
-        return true;
+        return user;
     }
 }
