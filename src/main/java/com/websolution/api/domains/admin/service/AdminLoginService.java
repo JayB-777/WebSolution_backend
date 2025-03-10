@@ -1,5 +1,7 @@
 package com.websolution.api.domains.admin.service;
 
+import com.websolution.api.common.response.BaseResponseStatus;
+import com.websolution.api.domains.admin.model.response.ApprovedUserResponse;
 import com.websolution.api.domains.admin.model.response.PendingUserResponse;
 import com.websolution.api.domains.entity.Role;
 import com.websolution.api.domains.entity.User;
@@ -18,9 +20,21 @@ public class AdminLoginService {
         return userRepository.findByRole(Role.PENDING);
     }
 
-    public void approveUser(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-        user.setRole(Role.USER);
-        userRepository.save(user);
+    public List<ApprovedUserResponse> approveUsers(List<String> userLoginIds) {
+        // PENDING 상태의 유저만 필터링하여 가져오기
+        List<User> users =
+                userRepository.findByLoginIdIn(userLoginIds).stream().filter(user -> user.getRole() == Role.PENDING)
+                        .toList();
+
+        if (users.isEmpty()) {
+            throw new IllegalArgumentException(BaseResponseStatus.NOT_FOUND_PENDING_USER.getMessage());
+        }
+
+        // 역할 변경
+        users.forEach(user -> user.setRole(Role.USER));
+        userRepository.saveAll(users);
+
+        // 승인된 유저들의 정보를 ApprovedUserResponse 리스트로 변환 후 반환
+        return users.stream().map(ApprovedUserResponse::fromEntity).toList();
     }
 }
