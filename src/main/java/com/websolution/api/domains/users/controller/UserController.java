@@ -29,10 +29,10 @@ public class UserController {
 
     @PostMapping("/login")
     public BaseResponse<UserLoginResponse> login(@RequestBody UserLoginRequest request) {
-        User authenticatedUser = loginService.authenticate(request.getLoginId(), request.getPassword());
-        if (authenticatedUser == null) {
+        UserLoginResponse loginResponse = loginService.authenticate(request.getLoginId(), request.getPassword());
+        if (loginResponse == null) {
             return new BaseResponse<>(BaseResponseStatus.LOGIN_FAILED);
         }
-        return new BaseResponse<>(new UserLoginResponse(authenticatedUser.getLoginId()));
+        return new BaseResponse<>(loginResponse);
     }
 }
